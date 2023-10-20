@@ -1,0 +1,12 @@
+{
+	"papersDirectory": "./papers",
+	"R_SPLITTER_CHUNK_SIZE": 450,
+	"R_SPLITTER_CHUNK_OVERLAP": 50,
+	"R_SPLITTER_SEPERATORS": ["\n\n", "\n", " " ,""],
+	"ENCODER_MODEL": "all-MiniLM-L6-v2",
+	"ENCODER_KWARGS" : {"normalize_embeddings": "False"},
+	"CHROMA_COLLECTOIN_NAME" : "testCollection",
+	"LLM_MODEL" : "meta-llama/Llama-2-7b-chat-hf",
+	"LLM_TASK":"text-generation",
+	"pipeline_kwargs":{"max_new_tokens":1000}
+}
