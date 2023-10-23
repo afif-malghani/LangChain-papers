@@ -164,4 +164,4 @@ vectorstore/
 
 
 #models
-models/
+models/*.bin
