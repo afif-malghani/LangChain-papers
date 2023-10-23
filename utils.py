@@ -3,9 +3,12 @@ from langchain.chains import RetrievalQA
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from prompts import qa_template
-from llm import llm
+from huggingface_hub.utils._errors import RepositoryNotFoundError
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import PyPDFLoader, DirectoryLoader
+from langchain.llms import CTransformers
+from huggingface_hub import hf_hub_download
+
 from config import (
     papersDirectory,
     papersFilesType,
@@ -61,6 +64,42 @@ def build_retrieval_qa(llm, prompt, vectordb):
     return dbqa
 
 
+
+def load_model():
+    
+    # check if file exists
+    try:    
+        llm = CTransformers(
+            model="llama-2-7b-chat.ggmlv3.q8_0.bin",  # Location of downloaded GGML model
+            model_type="llama",  # Model type Llama
+            config={"max_new_tokens": 256, "temperature": 0.01},
+        )
+        
+    # if huggingface_hub.utils._errors.RepositoryNotFoundError
+    except RepositoryNotFoundError as e:
+        try:
+            hf_hub_download(
+                "TheBloke/Llama-2-7B-Chat-GGML",
+                "llama-2-7b-chat.ggmlv3.q8_0.bin"
+            )
+            llm = CTransformers(
+            model="llama-2-7b-chat.ggmlv3.q8_0.bin",  # Location of downloaded GGML model
+            model_type="llama",  # Model type Llama
+            config={"max_new_tokens": 256, "temperature": 0.01},
+            )
+        except Exception as e:
+            print("\nFailed to download model: \n", e, "\nPlease download the model in the root directory of the project\n")
+            exit()
+            
+        
+        
+    except Exception as e:
+        print("\nFailed to load model: \n", e, "\nPlease download the model in the root directory of the project\n")
+        exit()
+        
+    return llm
+
+
 # Instantiate QA object
 def setup_dbqa():
     embeddings = HuggingFaceEmbeddings(
@@ -74,6 +113,7 @@ def setup_dbqa():
         db_build()
 
     qa_prompt = set_qa_prompt()
+    llm = load_model()
     dbqa = build_retrieval_qa(llm, qa_prompt, vectordb)
 
     return dbqa

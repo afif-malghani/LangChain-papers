@@ -9,18 +9,21 @@ from langchain.llms import CTransformers
 
 try:
     llm = CTransformers(
-        model="models/llama-2-7b-chat.ggmlv3.q8_0.bin",  # Location of downloaded GGML model
+        model="llama-2-7b-chat.ggmlv3.q8_0.bin",  # Location of downloaded GGML model
         model_type="llama",  # Model type Llama
         config={"max_new_tokens": 256, "temperature": 0.01},
     )
-except Exception as e:
+except FileNotFoundError as e:
     print(
         "\nFailed to load model: \n",
         e,
         "\nDownlaoding llama-2-7b-chat.ggmlv3.q8_0.bin \n",
     )
     hf_hub_download(
-        repo_id="TheBloke/Llama-2-7B-Chat-GGML"
+        repo_id="TheBloke/Llama-2-7B-Chat-GGML",
         filename="llama-2-7b-chat.ggmlv3.q8_0.bin",
         local_dir="models",
     )
+
+except Exception as e:
+    print("Failed to load model: \n", e)

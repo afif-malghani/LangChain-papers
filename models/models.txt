@@ -1,1 +1,1 @@
-Download models.bin file for the model of your choice and place it in this directory
+Download models.bin file for the model of your choice and place it in THE PARENT directory
