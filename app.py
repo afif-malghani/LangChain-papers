@@ -16,27 +16,42 @@ import json
 
 
 
+chat_history = []
+
 UPLOAD_FOLDER = 'static/pdf'
 ALLOWED_EXTENSIONS = {'pdf'}
 
-
-dbqa = None
-
-chat_history = []
 
 
 class Query(Resource):
     def post(self):
         data = request.get_json()
-        response = dbqa({"question": data["query"], "chat_history": chat_history})
-        
-        chat_history.append((data["query"], response["answer"]))
+        print(data)
+        if app.config['dbqa'] != None:
+            dbqa = app.config['dbqa']
+            response = dbqa({"question": data["query"], "chat_history": chat_history})
+            # response = dbqa({"question": data["query"]})
+        else:
+            dbqa = setup_dbqa(data["active_pdf"])
+            app.config['dbqa'] = dbqa
+            response = dbqa({"question": data["query"], "chat_history": chat_history})
+            # response = dbqa({"question": data["query"]})
         return response["answer"]
 
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+class switchChatbot(Resource):
+    def post(self):
+        data = request.get_json()
+        print(data["mem_key"])
+        if(data["chatbot"] == "dbqa"):
+            # create a global dbqa
+            app.config["dbqa"] = setup_dbqa(data["mem_key"])
+            
+        return make_response(render_template("chatbot.html"))
 
 class upload_file(Resource):
     def post(self):
@@ -53,8 +68,12 @@ class upload_file(Resource):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            dbqa = setup_dbqa()
-        return redirect(url_for('chatbot', pdf_filename=filename))
+            app.config['dbqa'] = setup_dbqa(filename)
+        pdf_list = os.listdir(UPLOAD_FOLDER)
+        active_pdf = filename
+        object_pass = {"pdf_list": pdf_list, "active_pdf": active_pdf}
+        object_pass_json = json.dumps(object_pass)
+        return redirect(url_for('chatbot', pdf_filename=object_pass_json))
         # return make_response(render_template("chatbot.html"))
 
 class index(Resource):
@@ -64,19 +83,24 @@ class index(Resource):
 
 class chatbot(Resource):
     def get(self):
-        pdf_filename = request.args.get('pdf_filename')
-        if(pdf_filename == None):
+        pdf_list_str = request.args.get("pdf_filename")
+        object_pass = json.loads(pdf_list_str)
+        print(request.args)
+        
+        if(object_pass == None):
             return flash('No pdf file uploaded')
-        return make_response(render_template("chatbot.html", pdf_filename=pdf_filename))
+        return make_response(render_template("chatbot.html", pdf_filename=object_pass))
 
 app = Flask(__name__)
 api = Api(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['dbqa'] = None
 
 
 api.add_resource(index, "/")
 api.add_resource(Query, "/query")
 api.add_resource(upload_file, "/upload")
+api.add_resource(switchChatbot, "/switch")
 api.add_resource(chatbot, "/chat")
 
 

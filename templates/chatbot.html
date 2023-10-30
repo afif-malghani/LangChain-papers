@@ -63,7 +63,7 @@
 
 
 
-<div class="col-xl-12 col-md-12 col-sm-12">
+<div class="flex-container-1-3">
 
 
 
@@ -97,57 +97,42 @@
 </div>
 
 
+<!-- the param pdf_filename has a list use this list to create n elements -->
+
 <ul class="chat-list">
 
-<li><a href="#"><div class="chat-linker">
-  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
-  <p>
-    Title Write Here
-  </p>
-  
-</div> 
-</a></li>
-<li><a href="#"><div class="chat-linker">
-  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
-  <p>
-    Title Write Here
-  </p>
-  
-</div> 
-</a></li>
-<li><a href="#"><div class="chat-linker">
-  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
-  <p>
-    Title Write Here
-  </p>
-  
-</div> 
-</a></li>
-<li><a href="#"><div class="chat-linker">
-  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
-  <p>
-    Title Write Here
-  </p>
-  
-</div> 
-</a></li>
-<li><a href="#"><div class="chat-linker">
-  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
-  <p>
-    Title Write Here
-  </p>
-  
-</div> 
-</a></li>
-<li><a href="#"><div class="chat-linker">
-  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
-  <p>
-    Title Write Here
-  </p>
-  
-</div> 
-</a></li>
 
+  {% for pdf in pdf_filename["pdf_list"]:%}
+    <!-- if first element add class active -->
+    {% if pdf == pdf_filename["active_pdf"] %}
+      <li><a class="active-chat" href="#"><div class="chat-linker">
+        <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
+        <p>
+          {{ pdf }}
+        </p>
+        
+      </div> 
+      </a></li>
+    {% else %}
+      <li><a href="#" onclick="switchChat()"><div class="chat-linker">
+        <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
+        <p>
+          {{ pdf }}
+        </p>
+        
+      </div> 
+      </a></li>
+    {% endif %}
+<!-- <li><a href="#"><div class="chat-linker">
+  <img src="{{ url_for('static', filename='images/icons8-chat-50.png')}}" alt="chat"/>
+  <p>
+    {{ pdf }}
+  </p>
+  
+</div> 
+</a></li> -->
+  
+  {% endfor %}
 </ul>
 
 </div>
@@ -155,1584 +140,156 @@
 </div>
 
 <div class="col-xl-12 col-md-5 col-sm-5">
-  <object data="{{ url_for('static', filename='pdf/'+pdf_filename) }}" type="application/pdf" width="100%" height="700px"></object>
+  <object data="{{ url_for('static', filename='pdf/'+pdf_filename['active_pdf']) }}" type="application/pdf" width="100%" height="700px"></object>
 </div>
 
-<div class="col-xl-12 col-md-5 col-sm-5">
-  <div class="scroll-chat" tabindex="0">
-    <div class="FdUCm">
 
+
+<div class="conversation">
+  <div class="conversation-container">
+    <div class="message sent">
+      tetst message 1
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
     </div>
-    <div class="_38vwC yTWyz"><button class="_1JCqN _1DlhQ">
-      <div class="_35lRO">
-        <div>
-          Click here to get older messages from your phone.</div>
+    <div class="message received">
+      test message 2
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+    <div class="message sent">
+      test message 3
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      <span id="random">test message last</span>
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+
+    <div class="message sent">
+      tetst message 1
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      test message 2
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+    <div class="message sent">
+      test message 3
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      <span id="random">test message last</span>
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+
+    <div class="message sent">
+      tetst message 1
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      test message 2
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+    <div class="message sent">
+      test message 3
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      <span id="random">test message last</span>
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+
+    <div class="message sent">
+      tetst message 1
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      test message 2
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+    <div class="message sent">
+      test message 3
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      <span id="random">test message last</span>
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+
+    <div class="message sent">
+      tetst message 1
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      test message 2
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+    <div class="message sent">
+      test message 3
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      <span id="random">test message last</span>
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+
+    <div class="message sent">
+      tetst message 1
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      test message 2
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+    <div class="message sent">
+      test message 3
+      <span class="metadata">
+          <span class="time">1:32 PM</span>
+      </span>
+    </div>
+    <div class="message received">
+      <span id="random">test message last</span>
+      <span class="metadata"><span class="time">1:32 PM</span></span>
+    </div>
+
+
+
+  </div>
+  
+  <form class="conversation-compose" id="queryForm">
+    <input class="input-msg" id="queryInput" name="input" placeholder="Type a message" autocomplete="off" autofocus>
+    <div class="photo">
+        <i class="zmdi zmdi-camera"></i>
+    </div>
+    <button class="send" type="submit">
+        <div class="circle">
+            <i class="zmdi zmdi-mail-send"></i>
         </div>
-      </button>
-    </div>
-    <div tabindex="-1" class="n5hs2j7m oq31bsqd gx1rr48f qh5tioqs" data-tab="8" role="application">
-      <div class="_1jHIY _2OvAm _2zFLj focusable-list-item" tabindex="-1">
-        <div class="UzMP7 n6BPp">
-          <span dir="auto" aria-label="" class="_11JPr" style="min-height: 0px;">
-          2/5/2023
-        </span>
-      </div>
-    </div>
-    <div class="" role="row"><div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_00B4CB8505C5EF483CC54723449896C8">
-      <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-in" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-      </path>
-        <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[10:14 PM, 2/5/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>hmmm krti change</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">10:14 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">10:14 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-    <span>
-
-    </span>
-    <div class="_1OdBf">
-
-    </div>
-  </div>
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-      <div>
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="_1jHIY _2OvAm _2zFLj focusable-list-item" tabindex="-1">
-      <div class="UzMP7 n6BPp">
-      <span dir="auto" aria-label="" class="_11JPr" style="min-height: 0px;">SATURDAY</span>
-    </div>
-  </div>
-    <div class="" role="row">
-      <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_378E53A147AA6600703120ED12B3DA4C">
-      <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-      <span>
-
-    </span>
-      <div class="UzMP7 _1uv-a _3m5cz">
-      <span data-icon="tail-in" class="p0s8B">
-      <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-      <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-    </path>
-      <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-    </path>
-    </svg>
-    </span>
-      <div class="_1BOF7 _2AOIt">
-      <span aria-label="Zukhruf Cousin:">
-
-    </span>
-      <div>
-      <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-      <div class="copyable-text" data-pre-plain-text="[11:14 AM, 10/28/2023] Zukhruf Cousin: ">
-      <div class="_21Ahp">
-      <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-      <span>afif</span>
-    </span>
-      <span class="">
-      <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-      <span class="tvf2evcx oq44ahr5">11:14 AM</span>
-    </span>
-    </span>
-    </div>
-  </div>
-  <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-    <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-    <span class="l7jjieqr fewfhwl7" dir="auto">11:14 AM</span>
-  </div>
+    </button>
+</form>
 </div>
-</div>
-</div>
-  <span>
-
-  </span>
-  <div class="_1OdBf">
-
-  </div>
-</div>
-  <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-    <div>
-
-  </div>
-</div>
-</div>
-</div>
-  <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-  </div>
-</div>
-</div>
-</div>
-  <div class="" role="row">
-    <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_8B32669D6655AE13C5A51A122A9F9646">
-    <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-    <span>
-
-  </span>
-    <div class="UzMP7 _1uv-a">
-    <div class="_1BOF7 _2AOIt">
-    <span aria-label="Zukhruf Cousin:">
-
-  </span>
-    <div>
-    <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-    <div class="copyable-text" data-pre-plain-text="[11:14 AM, 10/28/2023] Zukhruf Cousin: ">
-    <div class="_21Ahp">
-    <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-    <span>kaisy ho?</span>
-  </span>
-    <span class="">
-    <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-    <span class="tvf2evcx oq44ahr5">11:14 AM</span>
-  </span>
-  </span>
-  </div>
-</div>
-  <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-    <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-    <span class="l7jjieqr fewfhwl7" dir="auto">11:14 AM</span>
-  </div>
-</div>
-</div>
-</div>
-  <span>
-
-  </span>
-  <div class="_1OdBf">
-
-  </div>
-</div>
-  <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-    <div>
-
-  </div>
-</div>
-</div>
-</div>
-  <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-  </div>
-</div>
-</div>
-</div>
-  <div class="" role="row">
-    <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="true_923483480069@c.us_1913410F21BBA7D124EE90DF16FE2AF0">
-    <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-    <span>
-
-  </span>
-    <div class="UzMP7 _1uv-a _3m5cz">
-    <span data-icon="tail-out" class="p0s8B">
-    <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-    <path opacity="0.13" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z">
-
-  </path>
-    <path fill="currentColor" d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z">
-
-  </path>
-  </svg>
-  </span>
-    <div class="_1BOF7 _2AOIt">
-      <span aria-label="You:">
-
-    </span>
-      <div>
-      <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-      <div class="copyable-text" data-pre-plain-text="[12:11 PM, 10/28/2023] Afif Malghani: ">
-      <div class="_21Ahp">
-      <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-      <span>Assalamualaikum</span>
-    </span>
-      <span class="">
-      <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-      <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-    </span>
-      <span class="tvf2evcx oq44ahr5">12:11 PM</span>
-    </span>
-    </span>
-    </div>
-  </div>
-    <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-      <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-      <span class="l7jjieqr fewfhwl7" dir="auto">12:11 PM</span>
-  </div>
-  </div>
-  </div>
-  </div>
-    <span>
-
-    </span>
-    <div class="_1OdBf">
-
-    </div>
-  </div>
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-      <div>
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="" role="row">
-      <div tabindex="-1" class="CzM4m _2zFLj" data-id="true_923483480069@c.us_1F32C5FFB9A09FCFC748845615C48D2D">
-      <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-      <span>
-
-    </span>
-      <div class="UzMP7 _1uv-a">
-      <div class="_1BOF7 _2AOIt">
-      <span aria-label="You:">
-
-    </span>
-      <div>
-      <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-      <div class="copyable-text" data-pre-plain-text="[12:12 PM, 10/28/2023] Afif Malghani: ">
-      <div class="_21Ahp">
-      <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-      <span>Alhamdulillah</span>
-    </span>
-      <span class="">
-      <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-      <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-    </span>
-      <span class="tvf2evcx oq44ahr5">12:12 PM</span>
-    </span>
-    </span>
-    </div>
-  </div>
-    <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-      <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-      <span class="l7jjieqr fewfhwl7" dir="auto">12:12 PM</span>
-  </div>
-  </div>
-  </div>
-  </div>
-    <span>
-
-    </span>
-    <div class="_1OdBf">
-
-    </div>
-  </div>
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-      <div>
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="" role="row">
-      <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_20F68D3F65BA0EDD707133FA814E1BF0">
-      <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-      <span>
-
-    </span>
-      <div class="UzMP7 _1uv-a _3m5cz">
-      <span data-icon="tail-in" class="p0s8B">
-      <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-      <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-    </path>
-      <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-    </path>
-    </svg>
-    </span>
-      <div class="_1BOF7 _2AOIt">
-      <span aria-label="Zukhruf Cousin:">
-
-    </span>
-      <div>
-      <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-      <div class="copyable-text" data-pre-plain-text="[12:51 PM, 10/28/2023] Zukhruf Cousin: ">
-      <div class="_21Ahp">
-      <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-      <span>w.salam</span>
-    </span>
-      <span class="">
-      <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-      <span class="tvf2evcx oq44ahr5">12:51 PM</span>
-    </span>
-    </span>
-    </div>
-  </div>
-    <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-      <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-      <span class="l7jjieqr fewfhwl7" dir="auto">12:51 PM</span>
-    </div>
-  </div>
-  </div>
-  </div>
-    <span>
-
-    </span>
-    <div class="_1OdBf">
-
-    </div>
-  </div>
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-      <div>
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="" role="row">
-      <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_F80308273965CA7F2E93D4785A4A30EB">
-      <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-      <span>
-
-    </span>
-      <div class="UzMP7 _1uv-a">
-      <div class="_1BOF7 _2AOIt">
-      <span aria-label="Zukhruf Cousin:">
-
-    </span>
-      <div>
-      <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-      <div class="copyable-text" data-pre-plain-text="[12:52 PM, 10/28/2023] Zukhruf Cousin: ">
-      <div class="_21Ahp">
-      <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-      <span>afif python ata ha tmhy?</span>
-    </span>
-      <span class="">
-      <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-      <span class="tvf2evcx oq44ahr5">12:52 PM</span>
-    </span>
-    </span>
-    </div>
-  </div>
-    <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-      <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-      <span class="l7jjieqr fewfhwl7" dir="auto">12:52 PM</span>
-    </div>
-  </div>
-  </div>
-  </div>
-    <span>
-
-    </span>
-    <div class="_1OdBf">
-
-    </div>
-  </div>
-    <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-      <div>
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-    </div>
-  </div>
-  </div>
-  </div>
-    <div class="" role="row">
-      <div tabindex="-1" class="CzM4m _2zFLj" data-id="true_923483480069@c.us_3EB06AEE13670453861872">
-      <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-      <span>
-
-    </span>
-      <div class="UzMP7 _1uv-a _3m5cz">
-      <span data-icon="tail-out" class="p0s8B">
-      <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-      <path opacity="0.13" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z">
-
-      </path>
-      <path fill="currentColor" d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z">
-
-      </path>
-    </svg>
-    </span>
-      <div class="_1BOF7 _2AOIt">
-        <span aria-label="You:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[12:56 PM, 10/28/2023] Afif Malghani: ">
-        <div class="_1hl2r">
-        <div class="HLjg0">
-        <div class="_1EbXp" role="button" aria-label="Quoted Message" tabindex="0">
-        <span class="bg-color-1 _1Jh1l">
-
-      </span>
-        <div class="_3pMOs">
-        <div class="_1JeGx">
-        <div class="_3IzYj color-1" role="">
-        <span dir="auto" aria-label="" class="_3FuDI _11JPr" style="min-height: 0px;">Zukhruf Cousin</span>
-      </div>
-      <div class="_37DQv" dir="ltr" role="button">
-        <span dir="auto" aria-label="" class="quoted-mention _11JPr" style="min-height: 0px;">afif python ata ha tmhy?</span>
-      </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-      <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>yes</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-      </span>
-        <span class="tvf2evcx oq44ahr5">12:56 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-        <span class="l7jjieqr fewfhwl7" dir="auto">12:56 PM</span>
-    </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_5B34EB1A00AC89E44B6BBA1268BB2E72">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-in" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-      </path>
-        <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[12:59 PM, 10/28/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>mjhy krwa do gy kch time tk?</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">12:59 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">12:59 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_6DBEB65EA7979FE2F77991B52959C1B0">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a">
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:00 PM, 10/28/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>krwa mtlb smjha</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">1:00 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:00 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="true_923483480069@c.us_3EB0FF1C8F961DCAAF1A61">
-        <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-out" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z">
-
-      </path>
-        <path fill="currentColor" d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="You:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:00 PM, 10/28/2023] Afif Malghani: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>sure</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-      </span>
-        <span class="tvf2evcx oq44ahr5">1:00 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:00 PM</span>
-    </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_4908E85BB73AA4B20EDA2A4E4D55D830">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-in" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-      </path>
-        <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:00 PM, 10/28/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>thanks alot</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">1:00 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:00 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_D0A9F1C667175D2EEDA341058D1D986B">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a">
-        <div class="_1BOF7 _2AOIt">
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:00 PM, 10/28/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>dp to change kr lo <img crossorigin="anonymous" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="😁" draggable="false" class="b82 emoji wa _11JPr selectable-text copyable-text" data-plain-text="😁" tabindex="-1" style="background-position: -20px -60px;">
-      </span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">1:00 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:00 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_C6709D5334F24DE2ECA6A249CDFA3ED7">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a">
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:01 PM, 10/28/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>abhi thaky nae gandum dekh dekh k</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">1:01 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:01 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="true_923483480069@c.us_3EB0D86B9F3FD48C3EE253">
-        <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-out" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z">
-
-      </path>
-        <path fill="currentColor" d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="You:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:01 PM, 10/28/2023] Afif Malghani: ">
-        <div class="_1hl2r">
-        <div class="HLjg0">
-        <div class="_1EbXp" role="button" aria-label="Quoted Message" tabindex="0">
-        <span class="bg-color-1 _1Jh1l">
-
-      </span>
-        <div class="_3pMOs">
-        <div class="_1JeGx">
-        <div class="_3IzYj color-1" role="">
-        <span dir="auto" aria-label="" class="_3FuDI _11JPr" style="min-height: 0px;">Zukhruf Cousin</span>
-      </div>
-      <div class="_37DQv" dir="ltr" role="button">
-        <span dir="auto" aria-label="" class="quoted-mention _11JPr" style="min-height: 0px;">dp to change kr lo <img crossorigin="anonymous" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="😁" draggable="false" class="b82 emoji wa _11JPr" tabindex="-1" style="background-position: -20px -60px;">
-      </span>
-      </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-      <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>me tasweerain banata hi nai itni k change kr lu</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-      </span>
-        <span class="tvf2evcx oq44ahr5">1:01 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:01 PM</span>
-    </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_E4E229230AF0AA453F3466539CC8F5AC">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-in" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-      </path>
-        <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-      </path>
-      </svg>
-      </span>
-      <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[1:06 PM, 10/28/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>chlo good</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">1:06 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">1:06 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="_1jHIY _2OvAm _2zFLj focusable-list-item" tabindex="-1">
-        <div class="UzMP7 n6BPp">
-        <span dir="auto" aria-label="" class="_11JPr" style="min-height: 0px;">TODAY</span>
-      </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_741AABCD6B28ABC5E4E959C0F62B6071">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-in" class="p0s8B _3ABEn">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-      </path>
-        <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt _3ABEn">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[11:50 AM, 10/30/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>afif mery computer system mn windows 7 ha lakin us py Chinese language ha language change kaisy ho ge?</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">11:50 AM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">11:50 AM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj" data-id="true_923483480069@c.us_3EB016D9E8EB5354160F7C">
-        <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-out" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z">
-
-      </path>
-        <path fill="currentColor" d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="You:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[12:13 PM, 10/30/2023] Afif Malghani: ">
-        <div class="_1hl2r">
-        <div class="HLjg0">
-        <div class="_1EbXp" role="button" aria-label="Quoted Message" tabindex="0">
-        <span class="bg-color-1 _1Jh1l">
-
-      </span>
-        <div class="_3pMOs">
-        <div class="_1JeGx">
-        <div class="_3IzYj color-1" role="">
-        <span dir="auto" aria-label="" class="_3FuDI _11JPr" style="min-height: 0px;">Zukhruf Cousin</span>
-      </div>
-      <div class="_37DQv" dir="ltr" role="button">
-        <span dir="auto" aria-label="" class="quoted-mention _11JPr" style="min-height: 0px;">afif mery computer system mn windows 7 ha lakin us py Chinese language ha language change kaisy ho ge?</span>
-      </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-      <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>windows 7 <img crossorigin="anonymous" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="😂" draggable="false" class="b82 emoji wa _11JPr selectable-text copyable-text" data-plain-text="😂" tabindex="-1" style="background-position: -40px -60px;">
-      </span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-      </span>
-        <span class="tvf2evcx oq44ahr5">12:13 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-        <span class="l7jjieqr fewfhwl7" dir="auto">12:13 PM</span>
-    </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_7D6093948E5556E63A20CACD41A66839">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-        <span>
-
-      </span>
-        <div class="UzMP7 _1uv-a _3m5cz">
-        <span data-icon="tail-in" class="p0s8B">
-        <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-        <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-      </path>
-        <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-      </path>
-      </svg>
-      </span>
-        <div class="_1BOF7 _2AOIt">
-        <span aria-label="Zukhruf Cousin:">
-
-      </span>
-        <div>
-        <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-        <div class="copyable-text" data-pre-plain-text="[12:13 PM, 10/30/2023] Zukhruf Cousin: ">
-        <div class="_21Ahp">
-        <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-        <span>bro na hnso mn phly zalel hon</span>
-      </span>
-        <span class="">
-        <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-        <span class="tvf2evcx oq44ahr5">12:13 PM</span>
-      </span>
-      </span>
-      </div>
-    </div>
-      <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-        <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-        <span class="l7jjieqr fewfhwl7" dir="auto">12:13 PM</span>
-      </div>
-    </div>
-    </div>
-    </div>
-      <span>
-
-      </span>
-      <div class="_1OdBf">
-
-      </div>
-    </div>
-      <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-        <div>
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-      </div>
-    </div>
-    </div>
-    </div>
-      <div class="" role="row">
-        <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_315DD7C635C4FA2D0C6ACD9A96554620">
-        <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-          <span>
-
-        </span>
-          <div class="UzMP7 _1uv-a">
-          <div class="_1BOF7 _2AOIt">
-          <div>
-          <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-          <div class="copyable-text" data-pre-plain-text="[12:14 PM, 10/30/2023] Zukhruf Cousin: ">
-          <div class="_21Ahp">
-          <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-          <span>jo bhi hoti purani wali</span>
-        </span>
-          <span class="">
-          <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-          <span class="tvf2evcx oq44ahr5">12:14 PM</span>
-        </span>
-        </span>
         </div>
-      </div>
-        <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-          <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-          <span class="l7jjieqr fewfhwl7" dir="auto">12:14 PM</span>
-        </div>
-      </div>
-      </div>
-      </div>
-        <span>
-
-        </span>
-        <div class="_1OdBf">
-
-        </div>
-      </div>
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-          <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-          <div>
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="" role="row">
-          <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_82EE4BE111F163E09D9FC183504EE6B6">
-          <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-          <span>
-
-        </span>
-          <div class="UzMP7 _1uv-a">
-          <div class="_1BOF7 _2AOIt">
-          <div>
-          <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-          <div class="copyable-text" data-pre-plain-text="[12:14 PM, 10/30/2023] Zukhruf Cousin: ">
-          <div class="_21Ahp">
-          <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-          <span>wahi ha</span>
-        </span>
-          <span class="">
-          <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-          <span class="tvf2evcx oq44ahr5">12:14 PM</span>
-        </span>
-        </span>
-        </div>
-      </div>
-        <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-          <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-          <span class="l7jjieqr fewfhwl7" dir="auto">12:14 PM</span>
-        </div>
-      </div>
-      </div>
-      </div>
-        <span>
-
-        </span>
-        <div class="_1OdBf">
-
-        </div>
-      </div>
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-          <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-          <div>
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="" role="row">
-          <div tabindex="-1" class="CzM4m _2zFLj _3sxvM" data-id="false_923483480069@c.us_153C01CCC2F7D28CF7D03814B0E6D733">
-          <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-          <span>
-
-        </span>
-          <div class="UzMP7 _1uv-a">
-          <div class="_1BOF7 _2AOIt">
-          <div>
-          <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-          <div class="copyable-text" data-pre-plain-text="[12:14 PM, 10/30/2023] Zukhruf Cousin: ">
-          <div class="_21Ahp">
-          <div class="g0rxnol2 pglj95m3 p357zi0d ac2vgrno n1yiu2zv tt8xd2xn aumn88wd k0lnf8n4 htq1q0kf n3nyt3io _11JPr selectable-text copyable-text">
-          <span class="Ov-s3">
-          <img crossorigin="anonymous" src="/img/c5a15be93e425dcb8a26b06645ad4574_w_2068-64.png" alt="😂" draggable="false" class="URwQL YGPO2 _11JPr selectable-text copyable-text" data-plain-text="😂" tabindex="-1" style="visibility: visible;">
-        </span>
-        </div>
-      </div>
-      </div>
-        <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-          <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-          <span class="l7jjieqr fewfhwl7" dir="auto">12:14 PM</span>
-        </div>
-      </div>
-      </div>
-      </div>
-        <span>
-
-        </span>
-        <div class="_1OdBf">
-
-        </div>
-      </div>
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-          <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-          <div>
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="" role="row">
-          <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_708EF123E06ABEBDBC15B70543A79429">
-          <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-          <span>
-
-        </span>
-          <div class="UzMP7 _1uv-a">
-          <div class="_1BOF7 _2AOIt">
-          <span aria-label="Zukhruf Cousin:">
-
-        </span>
-          <div>
-          <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-          <div class="copyable-text" data-pre-plain-text="[12:14 PM, 10/30/2023] Zukhruf Cousin: ">
-          <div class="_21Ahp">
-          <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-          <span>mjhy nae pta 7 hoti 8 blablablabla</span>
-        </span>
-          <span class="">
-          <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-          <span class="tvf2evcx oq44ahr5">12:14 PM</span>
-        </span>
-        </span>
-        </div>
-      </div>
-        <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-          <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-          <span class="l7jjieqr fewfhwl7" dir="auto">12:14 PM</span>
-        </div>
-      </div>
-      </div>
-      </div>
-        <span>
-
-        </span>
-        <div class="_1OdBf">
-
-        </div>
-      </div>
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-          <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-          <div>
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="" role="row">
-          <div tabindex="-1" class="CzM4m _2zFLj" data-id="true_923483480069@c.us_3EB01BAA21FD8B19212631">
-          <div class="message-out focusable-list-item _1AOLJ _2UtSC _1jHIY">
-          <span>
-
-        </span>
-          <div class="UzMP7 _1uv-a _3m5cz">
-          <span data-icon="tail-out" class="p0s8B">
-          <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-          <path opacity="0.13" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z">
-
-        </path>
-          <path fill="currentColor" d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z">
-
-        </path>
-        </svg>
-        </span>
-          <div class="_1BOF7 _2AOIt">
-          <span aria-label="You:">
-
-        </span>
-          <div>
-          <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-          <div class="copyable-text" data-pre-plain-text="[12:14 PM, 10/30/2023] Afif Malghani: ">
-          <div class="_21Ahp">
-          <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-          <span>control panel &gt; reagion and language</span>
-        </span>
-          <span class="">
-          <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-          <span class="tvf2evcx oq44ahr5 qg8w82as">
-
-        </span>
-          <span class="tvf2evcx oq44ahr5">12:14 PM</span>
-        </span>
-        </span>
-        </div>
-      </div>
-        <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-          <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n" role="button">
-          <span class="l7jjieqr fewfhwl7" dir="auto">12:14 PM</span>
-      </div>
-      </div>
-      </div>
-      </div>
-        <span>
-
-        </span>
-        <div class="_1OdBf">
-
-        </div>
-      </div>
-        <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 kcgo1i74 sap93d0t gndfcl4n FxqSn">
-          <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-          <div>
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj b4u6kxhc rwlvdxyg">
-
-        </div>
-      </div>
-      </div>
-      </div>
-        <div class="" role="row">
-          <div tabindex="-1" class="CzM4m _2zFLj" data-id="false_923483480069@c.us_9DC8B3C0052056B9E584EB7985FAAB35">
-          <div class="message-in focusable-list-item _1AOLJ _2UtSC _1jHIY">
-          <span>
-
-        </span>
-          <div class="UzMP7 _1uv-a _3m5cz">
-          <span data-icon="tail-in" class="p0s8B">
-          <svg viewBox="0 0 8 13" height="13" width="8" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13">
-          <path opacity="0.13" fill="#0000000" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z">
-
-        </path>
-          <path fill="currentColor" d="M1.533,2.568L8,11.193V0L2.812,0C1.042,0,0.474,1.156,1.533,2.568z">
-
-        </path>
-        </svg>
-        </span>
-          <div class="_1BOF7 _2AOIt">
-          <span aria-label="Zukhruf Cousin:">
-
-        </span>
-          <div>
-          <div class="cm280p3y to2l77zo n1yiu2zv c6f98ldp ooty25bp oq31bsqd">
-          <div class="copyable-text" data-pre-plain-text="[12:15 PM, 10/30/2023] Zukhruf Cousin: ">
-          <div class="_21Ahp">
-          <span dir="ltr" aria-label="" class="_11JPr selectable-text copyable-text" style="min-height: 0px;">
-            <span>ok <img crossorigin="anonymous" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="🫡" draggable="false" class="b133 emoji wa _11JPr selectable-text copyable-text" data-plain-text="🫡" tabindex="-1" style="background-position: -60px -20px;">
-          </span>
-        </span>
-          <span class="">
-            <span class="o38k74y6 i86elurf neme6l2y kojwoqec bbl9m3t3 i5tg98hk jfqm35v0 przvwfww bdbt56hn cr2cog7z" aria-hidden="true">
-            <span class="tvf2evcx oq44ahr5">12:15 PM</span>
-        </span>
-        </span>
-        </div>
-        </div>
-          <div class="g0rxnol2 g2bpp9au faxx4fbg aja0i6dq jnwc1y2a bn7x0pqn qnz2jpws">
-            <div class="gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n">
-            <span class="l7jjieqr fewfhwl7" dir="auto">12:15 PM</span>
-          </div>
-        </div>
-        </div>
-        </div>
-          <span>
-
-          </span> 
-          <div class="_1OdBf">
-
-          </div>
-        </div>
-          <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd p357zi0d dnb887gk gjuq5ydh i2cterl7 fhf7t426 sap93d0t gndfcl4n FxqSn">
-            <div class="tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd dnb887gk gjuq5ydh i2cterl7 rqm6ogl5 i5tg98hk folpon7g przvwfww snweb893">
-            <div>
-
-          </div>
-        </div>
-        </div>
-        </div>
-          <div class="p357zi0d g0rxnol2 blj1rie1 px10qoeu ltyqj8pj okbql4zm ex3gcxaf">
-
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-</div>
-
 
 
 
@@ -1756,5 +313,88 @@
   </script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
   <script  src="js/script.js"></script>
+
+
+
+  <script>
+    function switchChat(){
+      var active_pdf = $(event.target).text().trim();
+      var pdf_list = [];
+      var pdf_list_elements = document.getElementsByClassName("chat-linker");
+      for (var i = 0; i < pdf_list_elements.length; i++) {
+        pdf_list.push(pdf_list_elements[i].innerText.trim());
+      }
+      var requestData = {
+        pdf_list: pdf_list,
+        active_pdf: active_pdf
+    };
+    fetch('/switch', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+  })
+  .then(response => {
+      // Handle the response as needed
+      if (response.ok) {
+          // Do something with a successful response
+      } else {
+          // Handle errors
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+    }
+  </script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const queryForm = document.getElementById("queryForm");
+      const queryInput = document.getElementById("queryInput");
+      const active_pdf = document.getElementsByClassName("active-chat")[0].innerText.trim(); 
+      queryForm.addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent the default form submission
+  
+          const query = queryInput.value;
+
+          console.log(query);
+  
+          if (query) {
+              // Create an object with the "query" key and the input value
+              var requestData = {
+                  query: query,
+                  active_pdf: active_pdf
+              };
+  
+              // Send a POST request to the "/query" route
+              fetch("/query", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(requestData),
+              })
+                  .then((response) => response.json())
+                  .then((data) => {
+                      console.log("Response:", data);
+  
+                      // Handle the response as needed
+                      // You can update the UI with the response data here
+                  })
+                  .catch((error) => {
+                      console.error("Error:", error);
+                  });
+  
+              // Clear the input field
+              queryInput.value = "";
+          }
+      });
+  });
+  
+  </script>
+
 </body>
 </html>

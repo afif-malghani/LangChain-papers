@@ -4,7 +4,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
-from prompts import qa_template
+# from prompts import qa_template
 from huggingface_hub.utils._errors import RepositoryNotFoundError
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import PyPDFLoader, DirectoryLoader
@@ -23,11 +23,11 @@ from config import (
 
 
 # Wrap prompt template in a PromptTemplate object
-def set_qa_prompt():
-    prompt = PromptTemplate(
-        template=qa_template, input_variables=["context", "query"]
-    )
-    return prompt
+# def set_qa_prompt():
+#     prompt = PromptTemplate(
+#         template=qa_template, input_variables=["context", "query", "history"]
+#     )
+#     return prompt
 
 
 def db_build():
@@ -59,6 +59,7 @@ def db_build():
 
 def build_conversational_chain(llm, vectordb, memory):
     # memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    print(memory)
     dbqa = ConversationalRetrievalChain.from_llm(llm, vectordb.as_retriever(), memory=memory)
     return dbqa
 
@@ -103,7 +104,7 @@ def load_model():
 
 
 # Instantiate QA object
-def setup_dbqa():
+def setup_dbqa(mem_key):
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
@@ -112,11 +113,11 @@ def setup_dbqa():
         vectordb = FAISS.load_local("vectorstore/db_faiss", embeddings)
     except:
         vectordb = db_build()
-    qa_prompt = set_qa_prompt()
+    # qa_prompt = set_qa_prompt()
     llm = load_model()
     # dbqa = build_retrieval_qa(llm, qa_prompt, vectordb)
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-    
+    memory = ConversationBufferMemory(memory_key=mem_key, return_messages=True)
+    # print(memory)
     dbqa = build_conversational_chain(llm, vectordb, memory=memory)
 
     return dbqa
