@@ -165,3 +165,18 @@ vectorstore/
 
 #models
 models/*.bin
+
+
+*.bin
+
+*.zip
+
+papers-bkp/
+
+frontend/
+
+test*
+
+multiDocs.py
+
+*.jpeg

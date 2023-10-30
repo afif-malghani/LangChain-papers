@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+    <head>
+        <meta charset="UTF-8">
+        <title>ChatPDF</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/css.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+            integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+            crossorigin="anonymous">
+    </head>
+    
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
+
+
+
+    <style>
+        ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
+        .dropdown-menu>li>a {
+        padding: 7px 20px;
+        border-bottom: solid 1px #ddd;
+        font-weight: bold;
+    }
+    </style>
+
+
+
+
+
+
+
+    <div class="col-xl-12 col-md-12 col-sm-12 topbar">
+
+        <div class="container">
+
+            <img src="{{ url_for('static', filename='images/botwisely.png') }}" height="100" alt="BotWisely Logo">
+
+
+        </div>
+    </div>  
+
+    
+
+    <!--slider-->
+    <div class="col-xl-12 col-md-12 col-sm-12 banner">
+
+    <div class="container">
+
+
+
+<!--<div class="col-xl-12 col-md-12 col-sm-12 upload-file">
+
+<h1 align="center">Chat with any <span>PDF</span>
+
+</h1>
+
+
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Drop a PDF</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Drag and drop a file or <br />select add PDF</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+    </div>
+  </div>
+</div>
+
+
+</div>-->
+
+
+
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <fieldset class="upload_dropZone text-center mb-3 p-4">
+        <h1 class="h2 text-center mb-3">Drag &amp; Drop PDF File</h1>
+        <svg class="upload_svg" width="60" height="60" aria-hidden="true">
+            <use href="#icon-imageUpload"></use>
+        </svg>
+        <input id="upload_pdf" name="file" class="position-absolute invisible" type="file" accept="application/pdf" />
+        <label class="btn btn-upload mb-3" for="upload_pdf">Choose PDF file</label>
+        <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+    </fieldset>
+</form>
+
+
+
+
+<svg style="display:none">
+  <defs>
+    <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
+      <svg xmlns="http://www.w3.org/2000/svg" width="94" height="94" viewBox="0 0 24 24" fill="none" stroke="#00b3bb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.8m8.7-1.6V21"/><path d="M16 16l-4-4-4 4"/></svg>
+    </symbol>
+  </defs>
+</svg>
+
+
+<h1 align="center">Your bots do the manual work, so you don't have to</h1>
+<p align="center">Save time for your teams and cut operating costs automating
+conversations across the entire customer journey.</p>
+
+
+</div>
+</div>
+
+<!--./slider-->
+
+
+<!--part1-->
+
+  
+<!--footer-->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script  src="js/script.js">
+
+  </script>
+
+  <!-- <script>
+    const uploadPdfInput = document.getElementById('upload_pdf');
+    
+    uploadPdfInput.addEventListener('change', function () {
+        // When a file is selected, submit the form
+        this.closest('form').submit();
+    });
+</script> -->
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadPdfInput = document.getElementById('upload_pdf');
+        
+        uploadPdfInput.addEventListener('change', function () {
+            const form = this.closest('form');
+            form.submit();
+            
+            // After form submission, handle the response
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();  // Prevent the default form submission
+                
+                // Perform an AJAX request to check the response from /upload
+                fetch('/upload', {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // If the response is 'success', send a GET request to /chat
+                        window.location.href = '/chat';
+                    } else {
+                        // Handle other cases if needed
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle error cases
+                });
+            });
+        });
+    });
+</script>
+
+
+<!-- 
+  <script>
+    document.getElementById('uploadButton').addEventListener('click', function() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const formData = new FormData();
+            formData.append('pdf_file', file);
+
+            fetch('/upload_pdf', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response as needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        } else {
+            console.error('No file selected');
+        }
+    });
+</script> -->
+</body>
+</html>

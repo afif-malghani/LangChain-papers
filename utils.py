@@ -1,5 +1,7 @@
 from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
+from langchain.memory import ConversationBufferMemory
+from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from prompts import qa_template
@@ -23,7 +25,7 @@ from config import (
 # Wrap prompt template in a PromptTemplate object
 def set_qa_prompt():
     prompt = PromptTemplate(
-        template=qa_template, input_variables=["context", "question"]
+        template=qa_template, input_variables=["context", "query"]
     )
     return prompt
 
@@ -50,6 +52,15 @@ def db_build():
     # Build and persist FAISS vector store
     vectorstore = FAISS.from_documents(texts, embeddings)
     vectorstore.save_local(vectorstoreCollectionName)
+    
+    return vectorstore
+
+
+
+def build_conversational_chain(llm, vectordb, memory):
+    # memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    dbqa = ConversationalRetrievalChain.from_llm(llm, vectordb.as_retriever(), memory=memory)
+    return dbqa
 
 
 # Build RetrievalQA object
@@ -77,19 +88,10 @@ def load_model():
         
     # if huggingface_hub.utils._errors.RepositoryNotFoundError
     except RepositoryNotFoundError as e:
-        try:
-            hf_hub_download(
-                "TheBloke/Llama-2-7B-Chat-GGML",
-                "llama-2-7b-chat.ggmlv3.q8_0.bin"
-            )
-            llm = CTransformers(
-            model="llama-2-7b-chat.ggmlv3.q8_0.bin",  # Location of downloaded GGML model
-            model_type="llama",  # Model type Llama
-            config={"max_new_tokens": 256, "temperature": 0.01},
-            )
-        except Exception as e:
-            print("\nFailed to download model: \n", e, "\nPlease download the model in the root directory of the project\n")
-            exit()
+        print(
+            "\nFailed to load model: \n",
+            e
+        )
             
         
         
@@ -108,12 +110,13 @@ def setup_dbqa():
     )
     try:
         vectordb = FAISS.load_local("vectorstore/db_faiss", embeddings)
-    except Exception as e:
-        print("Vector store not found, building now...")
-        db_build()
-
+    except:
+        vectordb = db_build()
     qa_prompt = set_qa_prompt()
     llm = load_model()
-    dbqa = build_retrieval_qa(llm, qa_prompt, vectordb)
+    # dbqa = build_retrieval_qa(llm, qa_prompt, vectordb)
+    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    
+    dbqa = build_conversational_chain(llm, vectordb, memory=memory)
 
     return dbqa
