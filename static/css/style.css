@@ -945,7 +945,8 @@ object{
 
 .conversation {
 	/* height: calc(100% -); */
-	min-height: 700px;
+	height: 800px;
+	max-width: 40%;
 	flex-grow: 1;
 	position: relative;
 	background-color: black;
@@ -1099,6 +1100,7 @@ object{
 	position: absolute;
 	bottom: 0;
 	padding-left: 1em;
+	padding-right: 1em;
 	border-radius: 1em;
 	flex-direction: row;
 	align-items: flex-end;
@@ -1172,7 +1174,7 @@ object{
 	cursor: pointer;
 	flex: 0 0 auto;
 	margin-left: 8px;
-	margin-right: 8px;
+	margin-right: 20px;
 	padding: 0;
 	position: relative;
 	outline: none;
@@ -1251,11 +1253,13 @@ object{
     -moz-osx-font-smoothing: grayscale;
 }
 
-.zmdi-mail-send:before {
-    content: '\f194';
+.zmdi-mail-send {
+    content: 'U+f194';
 }
 
 
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
+

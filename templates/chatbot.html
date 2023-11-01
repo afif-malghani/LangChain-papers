@@ -147,131 +147,7 @@
 
 <div class="conversation">
   <div class="conversation-container">
-    <div class="message sent">
-      tetst message 1
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      test message 2
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-    <div class="message sent">
-      test message 3
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      <span id="random">test message last</span>
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-
-    <div class="message sent">
-      tetst message 1
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      test message 2
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-    <div class="message sent">
-      test message 3
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      <span id="random">test message last</span>
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-
-    <div class="message sent">
-      tetst message 1
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      test message 2
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-    <div class="message sent">
-      test message 3
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      <span id="random">test message last</span>
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-
-    <div class="message sent">
-      tetst message 1
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      test message 2
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-    <div class="message sent">
-      test message 3
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      <span id="random">test message last</span>
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-
-    <div class="message sent">
-      tetst message 1
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      test message 2
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-    <div class="message sent">
-      test message 3
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      <span id="random">test message last</span>
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-
-    <div class="message sent">
-      tetst message 1
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      test message 2
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
-    <div class="message sent">
-      test message 3
-      <span class="metadata">
-          <span class="time">1:32 PM</span>
-      </span>
-    </div>
-    <div class="message received">
-      <span id="random">test message last</span>
-      <span class="metadata"><span class="time">1:32 PM</span></span>
-    </div>
+    
 
 
 
@@ -284,7 +160,7 @@
     </div>
     <button class="send" type="submit">
         <div class="circle">
-            <i class="zmdi zmdi-mail-send"></i>
+            <i class="zmdi glyphicon glyphicon-chevron-right"></i>
         </div>
     </button>
 </form>
@@ -318,6 +194,7 @@
 
   <script>
     function switchChat(){
+      console.log("function called")
       var active_pdf = $(event.target).text().trim();
       var pdf_list = [];
       var pdf_list_elements = document.getElementsByClassName("chat-linker");
@@ -360,6 +237,23 @@
   
           const query = queryInput.value;
 
+          // add message sent to conversation
+          var conversation = document.getElementsByClassName("conversation-container")[0];
+          var message_sent = document.createElement("div");
+          message_sent.className = "message sent";
+          // get current time in 12 hour format 
+          var date = new Date();
+          var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+          var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+          var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+          var time = hours + ":" + minutes + " " + am_pm;
+
+          message_sent.innerHTML = query + '<span class="metadata"><span class="time">'+time+'</span></span>';
+          conversation.appendChild(message_sent);
+          // scroll to bottom
+          conversation.scrollTop = conversation.scrollHeight;
+
+
           console.log(query);
   
           if (query) {
@@ -380,7 +274,21 @@
                   .then((response) => response.json())
                   .then((data) => {
                       console.log("Response:", data);
-  
+                      // add message received to conversation
+                      var date = new Date();
+                      var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+                      var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+                      var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                      var time = hours + ":" + minutes + " " + am_pm;
+
+                      var conversation = document.getElementsByClassName("conversation-container")[0];
+                      var message_received = document.createElement("div");
+                      message_received.className = "message received";
+                      message_received.innerHTML = data + '<span class="metadata"><span class="time">'+time+'</span></span>';
+                      conversation.appendChild(message_received);
+                      // scroll to bottom
+                      conversation.scrollTop = conversation.scrollHeight;
+
                       // Handle the response as needed
                       // You can update the UI with the response data here
                   })

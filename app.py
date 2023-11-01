@@ -16,7 +16,7 @@ import json
 
 
 
-chat_history = []
+chat_history = ()
 
 UPLOAD_FOLDER = 'static/pdf'
 ALLOWED_EXTENSIONS = {'pdf'}
@@ -46,12 +46,10 @@ def allowed_file(filename):
 class switchChatbot(Resource):
     def post(self):
         data = request.get_json()
-        print(data["mem_key"])
-        if(data["chatbot"] == "dbqa"):
-            # create a global dbqa
-            app.config["dbqa"] = setup_dbqa(data["mem_key"])
-            
-        return make_response(render_template("chatbot.html"))
+        print(data)
+        data_reconstruct = {"pdf_list": data["pdf_list"], "active_pdf": data["active_pdf"]}
+        app.config['dbqa'] = setup_dbqa(data["active_pdf"])
+        return redirect(url_for('chatbot', pdf_filename=data_reconstruct))
 
 class upload_file(Resource):
     def post(self):
@@ -84,8 +82,9 @@ class index(Resource):
 class chatbot(Resource):
     def get(self):
         pdf_list_str = request.args.get("pdf_filename")
+        print(pdf_list_str)
         object_pass = json.loads(pdf_list_str)
-        print(request.args)
+        print(object_pass)
         
         if(object_pass == None):
             return flash('No pdf file uploaded')

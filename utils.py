@@ -58,7 +58,7 @@ def db_build():
 
 
 def build_conversational_chain(llm, vectordb, memory):
-    # memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
     print(memory)
     dbqa = ConversationalRetrievalChain.from_llm(llm, vectordb.as_retriever(), memory=memory)
     return dbqa
